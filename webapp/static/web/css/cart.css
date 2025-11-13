@@ -1,0 +1,233 @@
+/* ============================================== */
+/* CUSTOM CART PAGE STYLES (UPDATED FOR TEXT VISIBILITY) */
+/* ============================================== */
+    /* Variables based on common theme colors (assuming dark text, light background, and a subtle accent) */
+    :root {
+        --cart-bg-color: #ffffff;
+        --text-color: #333333; /* Darker primary text color */
+        --light-text-color: #666666; /* Slightly lighter for secondary details */
+        --logo-font: 'Playfair Display', serif;
+        --body-font: 'Poppins', sans-serif;
+        --border-color: #e0e0e0;
+        --accent-color: #a89f8c;
+    }
+
+    /* Ensure the main container is centered and wide */
+    .cart-container {
+        max-width: 1200px;
+        margin: 80px auto 100px auto;
+        padding: 0 15px;
+    }
+
+    /* Main Cart Title Styling */
+    .cart-container h2 {
+        font-family: var(--logo-font);
+        font-size: 32px;
+        font-weight: 400;
+        margin-bottom: 50px;
+        text-align: left;
+        padding-left: 25px;
+    }
+
+    /* --- Cart Layout (Flexbox for 2 Columns) --- */
+    .cart-layout {
+        display: flex;
+        gap: 40px;
+    }
+
+    /* Items (Left Column - approx 70%) */
+    .cart-items {
+        flex: 2;
+    }
+
+    /* Summary (Right Column - approx 30%) */
+    .order-summary {
+        flex: 1;
+        background-color: var(--cart-bg-color);
+        padding: 30px;
+        border: 1px solid var(--border-color);
+        align-self: flex-start;
+    }
+
+    /* --- Cart Table Structure (CSS Grid) --- */
+    .cart-header, .cart-item {
+        display: grid;
+        grid-template-columns: 2.5fr 1fr 1fr 1fr; /* Product, Price, QTY, Total */
+        gap: 20px;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        position: relative;
+        font-family: var(--body-font);
+        color: var(--text-color); /* Ensure all primary table text is dark */
+    }
+
+    .cart-header {
+        font-size: 13px;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .cart-item {
+        font-size: 15px;
+    }
+
+    /* Product Column: Image and Text */
+    .col.product {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .book-thumbnail {
+        width: 70px;
+        height: 95px;
+        object-fit: cover;
+        border: 1px solid #ddd;
+    }
+
+    .book-title {
+        font-weight: 600; /* Increased weight for visibility */
+        display: block;
+        color: var(--text-color); /* Explicitly set to dark */
+    }
+
+    .book-author {
+        font-size: 13px;
+        color: var(--light-text-color); /* Retains a slightly lighter color for hierarchy */
+        font-weight: 400;
+    }
+
+    /* Quantity Input */
+    .col.quantity input {
+        width: 40px;
+        padding: 5px;
+        text-align: center;
+        border: 1px solid #ccc;
+        background-color: transparent;
+        font-family: var(--body-font);
+        color: var(--text-color); /* Dark input text */
+    }
+
+    /* Remove Button */
+    .remove-btn {
+        position: absolute;
+        right: 0;
+        font-size: 11px;
+        color: var(--light-text-color); /* Use slightly darker gray for better visibility */
+        top: 50%;
+        transform: translateY(-50%);
+        grid-column-start: 4;
+        cursor: pointer;
+    }
+    .remove-btn:hover {
+        color: var(--text-color);
+    }
+
+    /* Continue Shopping Link */
+    .cart-items > p a {
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-color); /* Ensure this link is also dark */
+    }
+
+
+    /* --- Order Summary Styles --- */
+    .order-summary h3 {
+        font-size: 18px;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+        font-weight: 500;
+        color: var(--text-color); /* Dark title */
+    }
+
+    .summary-line {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        font-size: 15px;
+        color: var(--text-color); /* Dark summary text */
+    }
+
+    .order-summary hr {
+        margin: 20px 0;
+        border: none;
+        border-top: 1px solid var(--accent-color);
+        opacity: 0.6;
+    }
+
+    .grand-total {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-color); /* Dark total */
+    }
+
+    .checkout-btn {
+        width: 100%;
+        padding: 15px;
+        background-color: var(--text-color);
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 20px;
+    }
+
+
+
+
+/* cart image banner
+
+
+/* --- New Full-Width Image Banner Section Styles (Centered, No Box) --- */
+.full-width-banner {
+    /* Full width background */
+    width: 100%;
+    height: 180px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+
+    /* Background Image/Style (Placeholder) */
+    background-image: url('https://via.placeholder.com/1800x180/d7d1c8/333?text=Special+Promotion+Banner');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Optional: Slight color overlay to help text visibility against the background */
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); /* Increased opacity for visibility */
+}
+
+.banner-content-wrap {
+    /* Centers the content horizontally and vertically across the full height/width */
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+
+    /* === FLEXBOX CENTERING === */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;    /* Center vertically */
+    /* ========================= */
+
+    padding: 0 15px;
+    text-align: center; /* Ensures the text itself is centered if it wraps */
+}
+
+.banner-heading {
+    /* Styles for the heading inside the banner */
+    font-family: var(--logo-font);
+    font-size: 38px; /* Slightly larger for impact */
+    font-weight: 700;
+    color: #ffffff; /* White text for maximum contrast */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8); /* Shadow for better readability over the image */
+    margin: 0;
+    line-height: 1.2;
+}
+
+
+

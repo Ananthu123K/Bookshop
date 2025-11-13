@@ -1,0 +1,225 @@
+/* ============================================== */
+/* CHECKOUT PAGE STYLES (NEW SECTION) */
+/* ============================================== */
+
+/* Main Container and Title */
+.checkout-container {
+    max-width: 1200px;
+    margin: 80px auto 100px auto;
+    padding: 0 15px;
+}
+
+.checkout-container h2 {
+    font-family: var(--logo-font);
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 50px;
+    text-align: left;
+    padding-left: 15px;
+}
+
+/* --- Checkout Banner (Reusing Cart Style) --- */
+.full-width-banner {
+    width: 100%;
+    height: 180px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+    background-image: url('https://via.placeholder.com/1800x180/d7d1c8/333?text=Secure+Checkout+Banner');
+    background-size: cover;
+    background-position: center;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+}
+
+.banner-content-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+    text-align: center;
+}
+
+.banner-heading {
+    font-family: var(--logo-font);
+    font-size: 30px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    margin: 0;
+}
+/* --- End Banner Styles --- */
+
+
+/* Layout Split */
+.checkout-layout {
+    display: flex;
+    gap: 40px;
+    padding: 0 15px;
+}
+
+.checkout-form {
+    flex: 2; /* Left column: 70% */
+}
+
+.order-summary-checkout {
+    flex: 1; /* Right column: 30% */
+    background-color: var(--cart-bg-color);
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    align-self: flex-start;
+}
+
+/* Form Styles */
+.checkout-form h3 {
+    font-family: var(--body-font);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select {
+    width: 100%;
+    padding: 12px 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 15px;
+    font-family: var(--body-font);
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+/* Flex Grouping for side-by-side fields */
+.name-fields, .city-fields, .card-info-fields {
+    display: flex;
+    gap: 20px;
+}
+
+.half-width {
+    width: 50%;
+}
+.third-width {
+    width: calc(100% / 3);
+}
+
+/* Payment Radio Buttons */
+.payment-options {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.radio-group label {
+    display: inline-block;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.card-details {
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.billing-checkbox {
+    margin-top: 30px;
+}
+
+/* --- Order Summary Styles (Right Column) --- */
+.order-summary-checkout h3 {
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.item-list-checkout {
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--light-text-color);
+}
+
+.item-name {
+    font-weight: 400;
+}
+.item-price {
+    font-weight: 600;
+}
+
+.order-summary-checkout hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 15px 0;
+}
+
+.total-divider {
+    border-top: 2px solid var(--accent-color) !important;
+    opacity: 1 !important;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.grand-total {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.place-order-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--text-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: background-color 0.2s;
+}
+
+.place-order-btn:hover {
+    background-color: #000;
+}
+
+.security-note {
+    font-size: 12px;
+    text-align: center;
+    color: var(--light-text-color);
+    margin-top: 15px;
+}

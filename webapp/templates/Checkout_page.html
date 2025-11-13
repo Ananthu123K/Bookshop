@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<title>Bookmart</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/normalize.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/icomoon/icomoon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/vendor.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/cardstyles.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/cart.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/checkout.css' %}">
+
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
+
+	<div id="header-wrap">
+
+		<div class="top-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="social-links">
+							<ul>
+								<li>
+									<a href="#"><i class="icon icon-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-twitter"></i></a>
+								</li>
+							</ul>
+						</div><!--social-links-->
+					</div>
+					<div class="col-md-6">
+						<div class="right-element">
+							{% if request.session.Name %}
+							<a href="{% url 'user_logout' %}" class="user-account for-buy"><i
+									class="icon icon-user"></i><span>Welcome{{ request.session.Name }} / Logout</span></a>
+							{% else %}
+							<a href="{% url 'user_login' %}" class="user-account for-buy"><i
+									class="icon icon-user"></i><span>Login</span></a>
+							{% endif %}
+
+							<a href="{% url 'cart_page' %} " class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:(0
+									$)</span></a>
+
+							<div class="action-menu">
+
+								<div class="search-bar">
+									<a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+										<i class="icon icon-search"></i>
+									</a>
+									<form role="search" method="get" class="search-box">
+										<input class="search-field text search-input" placeholder="Search"
+											type="search">
+									</form>
+								</div>
+							</div>
+
+						</div><!--top-right-->
+					</div>
+
+				</div>
+			</div>
+		</div><!--top-content-->
+
+		<header id="header">
+			<div class="container-fluid">
+				<div class="row">
+
+					<div class="col-md-2">
+						<div class="main-logo">
+							<a href="index.html"><img src="{% static 'web/images/main-logo.png' %}" alt="logo"></a>
+						</div>
+
+					</div>
+
+					<div class="col-md-10">
+
+						<nav id="navbar">
+							<div class="main-menu stellarnav">
+								<ul class="menu-list">
+									<li class="menu-item active"><a href="{% url 'home_page' %}">Home</a></li>
+									<li class="menu-item"><a href="{% url 'about_page' %}" class="nav-link">About us</a></li>
+									<li class="menu-item has-sub">
+										<a href="#pages" class="nav-link">Categories</a>
+
+										<ul>
+											{% for i in category %}
+											<li class="active"><a href="{% url 'filtered_books' book_category=i.Category_name %}">{{ i.Category_name }}</a></li>
+											{% endfor %}
+
+										</ul>
+
+									</li>
+
+									<li class="menu-item"><a href="{% url 'popular_books' %}" class="nav-link">Popular</a></li>
+									<li class="menu-item"><a href="{% url 'contact_page' %}" class="nav-link">Contact us</a></li>
+<!--									<li class="menu-item"><a href="#latest-blog" class="nav-link">Articles</a></li>-->
+<!--									<li class="menu-item"><a href="#download-app" class="nav-link">Download App</a></li>-->
+								</ul>
+
+								<div class="hamburger">
+									<span class="bar"></span>
+									<span class="bar"></span>
+									<span class="bar"></span>
+								</div>
+
+							</div>
+						</nav>
+
+					</div>
+
+				</div>
+			</div>
+		</header>
+
+	</div><!--header-wrap-->
+
+
+
+
+
+
+
+
+
+
+
+
+<main class="checkout-container">
+
+    <section class="full-width-banner">
+        <div class="container-fluid">
+            <div class="banner-content-wrap">
+                <h3 class="banner-heading">Secure Checkout - Final Step to Your New Books!</h3>
+            </div>
+        </div>
+    </section>
+
+    <h2>CHECKOUT</h2>
+
+    <div class="checkout-layout">
+
+        <section class="checkout-form">
+            <h3>1. Contact & Shipping Information</h3>
+            <form id="checkout-form">
+
+                <div class="form-group full-width">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="email@example.com" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="country">Country/Region</label>
+                    <select id="country" name="country" required>
+                        <option value="">Select a country...</option>
+                        <option value="us">United States</option>
+                        <option value="ca">Canada</option>
+                        </select>
+                </div>
+
+                <div class="name-fields">
+                    <div class="form-group half-width">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first_name" required>
+                    </div>
+                    <div class="form-group half-width">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last_name" required>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="Street address, P.O. Box" required>
+                </div>
+                <div class="form-group full-width">
+                    <input type="text" id="apartment" name="apartment" placeholder="Apartment, suite, etc. (optional)">
+                </div>
+
+                <div class="city-fields">
+                    <div class="form-group third-width">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group third-width">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" required>
+                    </div>
+                    <div class="form-group third-width">
+                        <label for="zip">ZIP Code</label>
+                        <input type="text" id="zip" name="zip" required>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">2. Payment Method</h3>
+
+                <div class="payment-options">
+                    <div class="radio-group">
+                        <input type="radio" id="card" name="payment-method" value="card" checked>
+                        <label for="card">Credit Card</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="paypal" name="payment-method" value="paypal">
+                        <label for="paypal">PayPal</label>
+                    </div>
+                </div>
+
+                <div class="card-details">
+                    <div class="form-group full-width">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" name="card_number" placeholder="XXXX XXXX XXXX XXXX">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="card-name">Name on Card</label>
+                        <input type="text" id="card-name" name="card_name">
+                    </div>
+                    <div class="card-info-fields">
+                        <div class="form-group half-width">
+                            <label for="expiry">Expiration (MM/YY)</label>
+                            <input type="text" id="expiry" name="expiry" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group half-width">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" placeholder="123">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="billing-checkbox">
+                    <input type="checkbox" id="billing-same" checked>
+                    <label for="billing-same">Billing address same as shipping</label>
+                </div>
+
+            </form>
+        </section>
+
+        <section class="order-summary-checkout">
+            <h3>Order Summary</h3>
+
+            <div class="item-list-checkout">
+                <div class="summary-item">
+                    <span class="item-name">The Minimalist Mindset (x1)</span>
+                    <span class="item-price">$15.99</span>
+                </div>
+                <div class="summary-item">
+                    <span class="item-name">Echoes of the Past (x2)</span>
+                    <span class="item-price">$45.00</span>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="summary-line">
+                <span>Subtotal</span>
+                <span>$60.99</span>
+            </div>
+            <div class="summary-line">
+                <span>Shipping</span>
+                <span>$0.00</span>
+            </div>
+            <div class="summary-line">
+                <span>Tax (estimated)</span>
+                <span>$0.00</span>
+            </div>
+
+            <hr class="total-divider">
+
+            <div class="summary-line grand-total">
+                <span>Total Due</span>
+                <span>$60.99</span>
+            </div>
+
+            <button type="submit" form="checkout-form" class="place-order-btn">PLACE ORDER NOW</button>
+
+            <p class="security-note">Secure checkout powered by Stripe.</p>
+
+        </section>
+
+    </div></main>
+
+
+
+
+
+
+
+    <section id="subscribe">
+		<div class="container">
+			<div class="row justify-content-center">
+
+				<div class="col-md-8">
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<div class="title-element">
+								<h2 class="section-title divider">Subscribe to our newsletter</h2>
+							</div>
+
+						</div>
+						<div class="col-md-6">
+
+							<div class="subscribe-content" data-aos="fade-up">
+								<p>Sed eu feugiat amet, libero ipsum enim pharetra hac dolor sit amet, consectetur. Elit
+									adipiscing enim pharetra hac.</p>
+								<form id="form">
+									<input type="text" name="email" placeholder="Enter your email addresss here">
+									<button class="btn-subscribe">
+										<span>send</span>
+										<i class="icon icon-send"></i>
+									</button>
+								</form>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+	<footer >
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-4">
+
+					<div class="footer-item">
+						<div class="company-brand">
+							<img src="{% static 'web/images/main-logo.png' %}" alt="logo" class="footer-logo">
+
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>About Us</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">vision</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">articles </a>
+							</li>
+							<li class="menu-item">
+								<a href="#">careers</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">service terms</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">donate</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Discover</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Books</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Authors</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Subjects</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Advanced Search</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Account Login</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="{% url 'signin_page' %}">Sign In</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">View Cart</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">My Wishtlist</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Track My Order</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Help</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Help center</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Report a problem</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Suggesting edits</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Contact us</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- / row -->
+
+		</div>
+	</footer>
+
+	<div id="footer-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="copyright">
+						<div class="row">
+
+							<div class="col-md-6">
+								<p>© 2025 All rights reserved </p>
+							</div>
+						</div>
+					</div><!--grid-->
+
+				</div><!--footer-bottom-content-->
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'web/js/jquery-1.11.0.min.js' %}"></script>
+	<script src="{% static 'web/https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js' %}"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+	<script src="{% static 'web/js/plugins.js' %}"></script>
+	<script src="{% static 'web/js/script.js' %}"></script>
+
+</body>
+
+</html>

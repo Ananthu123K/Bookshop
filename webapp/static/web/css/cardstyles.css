@@ -1,0 +1,169 @@
+/* --- Card and Grid Consistency --- */
+
+/* Ensures columns take full height and adds spacing between cards */
+.category-card-row .category-card-item {
+    display: flex;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Styles the Card for Uniformity and visual definition */
+.product-item {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+
+/* --- Image Sizing Consistency --- */
+
+/* Target the Figure wrapper to set a FIXED height for the image area */
+.product-style {
+    /* KEY CHANGE: Fixed height for the image container (280px) */
+    height: 280px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center; /* Centers the image horizontally */
+    align-items: center; /* Centers the image vertically */
+    margin: 0;
+    padding: 10px;
+    position: relative; /* Needed for positioning the View More button */
+}
+
+/* Target the Image Tag to ensure it fits within the fixed container */
+.product-style .category-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensures the whole image is visible without cropping */
+}
+
+/* Positioning and hiding the "View more" button */
+.product-style .add-to-cart {
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-item:hover .add-to-cart {
+    opacity: 1;
+}
+
+
+
+
+/* =========================================
+   1. CARD CONTAINER STYLING (.book-card)
+   ========================================= */
+
+/* Styles for the main card container (the wrapper for a single book) */
+.product-grid .book-card {
+    /* Visual Consistency */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+
+    /* Layout & Alignment */
+    text-align: center;
+    margin-bottom: 20px; /* Space between rows */
+    height: 100%;       /* Ensures all cards in a row are the same height */
+    overflow: hidden;
+    padding-bottom: 10px; /* Space inside the bottom of the card */
+}
+
+
+/* =========================================
+   2. IMAGE SIZING & CENTERING
+   ========================================= */
+
+/* Fixed height for the image wrapper (figure element) */
+.book-card .card-image-container {
+    height: 280px; /* <-- CONSISTENT IMAGE HEIGHT */
+    width: 100%;
+
+    /* Centering the Image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Cleanup */
+    overflow: hidden;
+    margin: 0;
+    padding: 10px;
+    position: relative; /* For "Add to Cart" button positioning */
+}
+
+/* Styling for the image element itself */
+.card-image-container .card-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensures the whole book cover is visible */
+    transition: transform 0.3s ease; /* Optional: smooth transition */
+}
+
+
+/* =========================================
+   3. CAPTION & PRICE STYLING
+   ========================================= */
+
+/* Styling for the description area */
+.book-card .card-caption {
+    padding: 10px 15px 15px;
+}
+
+/* Styling for the author name */
+.book-card .card-caption span {
+    display: block;
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* Styling for the price area */
+.book-card .item-price {
+    font-weight: bold;
+    color: #D80000; /* Use a distinct color for the offer price */
+    font-size: 1.1em;
+    margin-top: 5px;
+}
+
+/* Styling for the original, struck-through price */
+.book-card .item-price .prev-price {
+    text-decoration: line-through;
+    color: #999;
+    font-weight: normal;
+    margin-right: 8px;
+    font-size: 0.8em;
+}
+
+
+/* =========================================
+   4. ADD TO CART BUTTON (Hover Effect)
+   ========================================= */
+
+/* Hide the button by default */
+.book-card .add-to-cart {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+/* Show button on card hover */
+.book-card:hover .add-to-cart {
+    opacity: 1;
+}

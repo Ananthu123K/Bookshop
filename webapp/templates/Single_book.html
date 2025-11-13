@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<title>BookSaw - Free Book Store HTML CSS Template</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/normalize.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/icomoon/icomoon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/vendor.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/style.css' %}">
+
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
+
+	<div id="header-wrap">
+
+		<div class="top-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="social-links">
+							<ul>
+								<li>
+									<a href="#"><i class="icon icon-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-twitter"></i></a>
+								</li>
+							</ul>
+						</div><!--social-links-->
+					</div>
+					<div class="col-md-6">
+						<div class="right-element">
+							{% if request.session.Name %}
+							<a href="{% url 'user_logout' %}" class="user-account for-buy"><i
+									class="icon icon-user"></i><span>Welcome{{ request.session.Name }} / Logout</span></a>
+							{% else %}
+							<a href="{% url 'user_login' %}" class="user-account for-buy"><i
+									class="icon icon-user"></i><span>Login</span></a>
+							{% endif %}
+
+							<a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:(0
+									$)</span></a>
+
+							<div class="action-menu">
+
+								<div class="search-bar">
+									<a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+										<i class="icon icon-search"></i>
+									</a>
+									<form role="search" method="get" class="search-box">
+										<input class="search-field text search-input" placeholder="Search"
+											type="search">
+									</form>
+								</div>
+							</div>
+
+						</div><!--top-right-->
+					</div>
+
+				</div>
+			</div>
+		</div><!--top-content-->
+
+		<header id="header">
+			<div class="container-fluid">
+				<div class="row">
+
+					<div class="col-md-2">
+						<div class="main-logo">
+							<a href="index.html"><img src="{% static 'web/images/main-logo.png' %}" alt="logo"></a>
+						</div>
+
+					</div>
+
+					<div class="col-md-10">
+
+						<nav id="navbar">
+							<div class="main-menu stellarnav">
+								<ul class="menu-list">
+									<li class="menu-item"><a href="{% url 'home_page' %}">Home</a></li>
+									<li class="menu-item"><a href="{% url 'about_page' %}" class="nav-link">About us</a></li>
+									<li class="menu-item has-sub">
+										<a href="#pages" class="nav-link">Categories</a>
+
+										<ul>
+											{% for i in category %}
+											<li class="active"><a href="{% url 'filtered_books' book_category=i.Category_name %}">{{ i.Category_name }}</a></li>
+											{% endfor %}
+
+										</ul>
+
+									</li>
+
+									<li class="menu-item"><a href="{% url 'popular_books' %}" class="nav-link">Popular</a></li>
+									<li class="menu-item"><a href="{% url 'contact_page' %}" class="nav-link">Contact us</a></li>
+<!--									<li class="menu-item"><a href="#latest-blog" class="nav-link">Articles</a></li>-->
+<!--									<li class="menu-item"><a href="#download-app" class="nav-link">Download App</a></li>-->
+								</ul>
+
+								<div class="hamburger">
+									<span class="bar"></span>
+									<span class="bar"></span>
+									<span class="bar"></span>
+								</div>
+
+							</div>
+						</nav>
+
+					</div>
+
+				</div>
+			</div>
+		</header>
+
+	</div><!--header-wrap-->
+
+
+
+
+
+
+
+
+	<section id="best-selling" class="leaf-pattern-overlay">
+    <div class="corner-pattern-overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="row mb-5">
+                    <div class="col-md-6">
+                        <figure class="products-thumb">
+                            <img src="{{ books.Cover_image.url }}" alt="book" class="single-image">
+                        </figure>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="product-entry">
+                            <h2 class="section-title divider">{{ books.Category }}</h2>
+                            <form method="POST" action="#">
+
+                                <div class="products-content">
+                                    <div class="author-name">By {{ books.Author }}</div>
+                                    <h3 class="item-title">{{ books.Title }}</h3>
+                                    <p>{{ books.Description }}</p>
+
+
+
+                                    <!-- Unit Price -->
+                                    <div class="item-price mb-3">
+                                        <strong>Price:</strong> Rs. <span id="bookPrice">{{ books.Price }}</span>
+                                    </div>
+
+									{% if request.session.Name %}
+
+                                    <!-- Quantity Field -->
+                                    <div class="mb-3">
+                                        <label for="quantity"><strong>Quantity:</strong></label>
+                                        <input type="number" id="quantity" name="quantity" value="1" min="1"
+                                            class="form-control w-50" placeholder="Total Price">
+                                    </div>
+
+                                    <!-- Total Price as Input -->
+                                    <div class="mb-4">
+                                        <label for="totalPrice"><strong>Total Price:</strong></label>
+                                        <input type="text" id="totalPrice" name="total_price"
+                                            class="form-control w-50" placeholder="Total Price" >
+                                    </div>
+									 <div class="mb-4">
+<!--                                        <label for="totalPrice"><strong>Title</strong></label>-->
+                                        <input type="hidden" id=title"" name="total_price"
+                                            class="form-control w-50" placeholder="Title" value="{{ books.Title }}" >
+                                    </div>
+									 <div class="mb-4">
+<!--                                        <label for="totalPrice"><strong>Price</strong></label>-->
+                                        <input type="hidden" id="price" name="total_price"
+                                            class="form-control w-50" placeholder="Price" value="{{ books.Price }}" >
+                                    </div>
+									 <div class="mb-4">
+<!--                                        <label for="totalPrice"><strong>Username</strong></label>-->
+                                        <input type="hidden" id="username" name="total_price"
+                                            class="form-control w-50" placeholder="Username" value="{{ request.session.Name }}">
+                                    </div>
+
+                                    <!-- Add to Cart Button -->
+                                    <div class="btn-wrap">
+                                        <button type="submit" class="btn-accent-arrow">
+                                            Add to Cart <i class="icon icon-ns-arrow-right"></i>
+                                        </button>
+                                    </div>
+									{% else %}
+									<span>Please login to add to cart</span>
+									{% endif %}
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!--	<section id="download-app" class="leaf-pattern-overlay">-->
+<!--		<div class="corner-pattern-overlay"></div>-->
+<!--		<div class="container">-->
+<!--			<div class="row justify-content-center">-->
+<!--				<div class="col-md-8">-->
+<!--					<div class="row">-->
+
+<!--						<div class="col-md-5">-->
+<!--							<figure>-->
+<!--								<img src="{% static 'web/images/device.png' %}" alt="phone" class="single-image">-->
+<!--							</figure>-->
+<!--						</div>-->
+
+<!--						<div class="col-md-7">-->
+<!--							<div class="app-info">-->
+<!--								<h2 class="section-title divider">Download our app now !</h2>-->
+<!--								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus-->
+<!--									liberolectus nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna.-->
+<!--									Adipiscing fames semper erat ac in suspendisse iaculis.</p>-->
+<!--								<div class="google-app">-->
+<!--									<img src="{% static 'web/images/google-play.jpg' %}" alt="google play">-->
+<!--									<img src="{% static 'web/images/app-store.jpg' %}" alt="app store">-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</section>-->
+
+
+
+	<footer >
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-4">
+
+					<div class="footer-item">
+						<div class="company-brand">
+							<img src="{% static 'web/images/main-logo.png' %}" alt="logo" class="footer-logo">
+
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>About Us</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">vision</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">articles </a>
+							</li>
+							<li class="menu-item">
+								<a href="#">careers</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">service terms</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">donate</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Discover</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Books</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Authors</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Subjects</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Advanced Search</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Account Login</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="{% url 'signin_page' %}">Sign In</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">View Cart</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">My Wishtlist</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Track My Order</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Help</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Help center</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Report a problem</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Suggesting edits</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Contact us</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- / row -->
+
+		</div>
+	</footer>
+
+	<div id="footer-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="copyright">
+						<div class="row">
+
+							<div class="col-md-6">
+								<p>© 2025 All rights reserved </p>
+							</div>
+						</div>
+					</div><!--grid-->
+
+				</div><!--footer-bottom-content-->
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'web/js/jquery-1.11.0.min.js' %}"></script>
+	<script src="{% static 'web/https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js' %}"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+	<script src="{% static 'web/js/plugins.js' %}"></script>
+	<script src="{% static 'web/js/script.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-info text-white text-center rounded-top-4">
+            <h4 class="mb-0">Edit Book Details</h4>
+        </div>
+        <div class="card-body">
+
+            <form method="post" action="{% url 'update_book' book.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Title -->
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input type="text" name="title" class="form-control" value="{{ book.Title }}" required>
+                </div>
+
+                <!-- Author -->
+                <div class="mb-3">
+                    <label class="form-label">Author</label>
+                    <input type="text" name="author" class="form-control" value="{{ book.Author }}" required>
+                </div>
+
+                <!-- Category -->
+                <div class="mb-3">
+                    <label class="form-label">Category</label>
+                    <select name="category" class="form-select" required>
+                        <option selected>{{ book.Category }}</option>
+                        {% for i in categories %}
+                            <option>{{ i.Category_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Price -->
+                <div class="mb-3">
+                    <label class="form-label">Price (₹)</label>
+                    <input type="number" name="price" class="form-control" value="{{ book.Price }}" required>
+                </div>
+
+                <!-- Publisher -->
+                <div class="mb-3">
+                    <label class="form-label">Publisher</label>
+                    <input type="text" name="publisher" class="form-control" value="{{ book.Publisher }}" required>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-control" rows="3" required>{{ book.Description }}</textarea>
+                </div>
+
+                <!-- Cover Image -->
+                <div class="mb-3">
+                    <label class="form-label">Cover Image</label><br>
+                    {% if book.Cover_image %}
+                        <img src="{{ book.Cover_image.url }}" width="120" height="150" class="border rounded mb-2">
+                    {% endif %}
+                    <input type="file" name="cover_image" class="form-control mt-2">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-warning px-4">Save Changes</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}
